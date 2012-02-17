@@ -1,0 +1,18 @@
+Convert 2x
+==========
+
+Simple script for downscaling @2x iOS images.
+
+Usage
+-----
+
+``` 
+cd dir_with_images  
+convert2x  
+```
+
+
+Tool searches for all images png with @2x suffix and automatically creates 
+1x image from it. Files are saved with same names, but without any 
+suffixes.
+

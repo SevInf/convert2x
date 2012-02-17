@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+import glob
+from os import path
+
+from PIL import Image
+
+def get_1x_name(file_name):
+    """returns name for 1x file given image file with @2x suffix"""
+    name, ext = path.splitext(file_name)
+    assert name.endswith("@2x")
+
+    return name[:-3] + ext
+
+def scale_down(file_name):
+    """Scales given image down x2. 
+       File name should have suffix @2x
+       Result image will be saved by the same name without suffix
+    """
+    image = Image.open(file_name)
+    new_size = (image.size[0] // 2, 
+                image.size[1] // 2)
+    result = image.resize(new_size, Image.ANTIALIAS)
+    result.save(get_1x_name(file_name))
+
+def enumerate2x():
+    """walks over all @2x.png and scales them down"""
+    for image_name in glob.glob('./*@2x.png'):
+        scale_down(image_name)
+
+
+if __name__ == '__main__':
+   enumerate2x() 
+
